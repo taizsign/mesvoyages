@@ -28,7 +28,6 @@
                 <a href="{{ path('app_voyages_tri', {champ: 'datevisite', ordre: 'ASC'}) }}" class="btn btn-sm btn-outline-light ms-2">↑</a>
                 <a href="{{ path('app_voyages_tri', {champ: 'datevisite', ordre: 'DESC'}) }}" class="btn btn-sm btn-outline-light">↓</a>
             </th>
-            {# Colonne pour le bouton supprimer #}
             <th>Actions</th>
         </tr>
         <tr>
@@ -47,7 +46,6 @@
             <th></th> <th></th> <th></th> </tr>
         </thead>
         <tbody>
-        {# voyages send par le controller #}
         {% for visite in visites %}
             <tr>
                 <td>
@@ -59,6 +57,12 @@
                 <td>{{ visite.note }}/20</td>
                 <td>{{ visite.datevisite ? visite.datevisite|date('d/m/Y') : '' }}</td>
                 <td>
+                    {# bouton edit #}
+                    <a href="{{ path('app_voyage_edit', {id: visite.id}) }}" class="btn btn-sm btn-info me-2">
+                        Editer
+                    </a>
+
+                    {# bouton suppr #}
                     <a href="{{ path('app_voyage_suppr', {id: visite.id}) }}"
                        class="btn btn-sm btn-danger"
                        onclick="return confirm('Etes-vous sûr de vouloir supprimer {{ visite.ville }} ?')">

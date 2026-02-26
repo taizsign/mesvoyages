@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Form\VisiteType;
 
 class VoyagesController extends AbstractController
 {
@@ -44,7 +45,7 @@ class VoyagesController extends AbstractController
     #[Route('/voyages/voyage/{id}', name: 'app_voyage_details')]
     public function showOne(VisiteRepository $repository, $id): Response
     {
-        // On cherche le voyage précis par son ID unique
+        // nn cherche le voyage précis par son id unique
         $visite = $repository->find($id);
 
         return $this->render('voyages/voyage.html.twig', [
@@ -59,5 +60,24 @@ class VoyagesController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_voyages');
+    }
+    #[Route('/voyages/edit/{id}', name: 'app_voyage_edit')]
+    public function edit(int $id, VisiteRepository $repository, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $visite = $repository->find($id);
+
+        $form = $this->createForm(VisiteType::class, $visite);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush(); // On met à jour la BDD
+            return $this->redirectToRoute('app_voyages');
+        }
+
+        return $this->render('voyages/edit.html.twig', [
+            'form' => $form->createView(),
+            'visite' => $visite
+        ]);
     }
 }
