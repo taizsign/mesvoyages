@@ -29,6 +29,22 @@
                 <a href="{{ path('app_voyages_tri', {champ: 'datevisite', ordre: 'DESC'}) }}" class="btn btn-sm btn-outline-light">↓</a>
             </th>
         </tr>
+        <tr>
+            <th>
+                {# turbo="false" #}
+                <form method="POST" action="{{ path('app_voyages_recherche', {champ: 'ville'}) }}" class="d-flex" data-turbo="false">
+                    <input type="text" name="recherche" class="form-control form-control-sm me-2" placeholder="Filtrer...">
+                    <button class="btn btn-sm btn-secondary" type="submit">Recherche</button>
+                </form>
+            </th>
+            <th>
+                {# turbo="false"  #}
+                <form method="POST" action="{{ path('app_voyages_recherche', {champ: 'pays'}) }}" class="d-flex" data-turbo="false">
+                    <input type="text" name="recherche" class="form-control form-control-sm me-2" placeholder="Filtrer...">
+                    <button class="btn btn-sm btn-secondary" type="submit">Recherche</button>
+                </form>
+            </th>
+            <th></th> <th></th> </tr>
         </thead>
         <tbody>
         {# voyages send par le controller #}

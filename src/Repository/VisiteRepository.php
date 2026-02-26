@@ -54,4 +54,22 @@ class VisiteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    /**
+     * @param string $champ
+     * @param string $valeur
+     * @return Visite[]
+     */
+    public function findByEqualValue($champ, $valeur): array
+    {
+        if ($valeur === "" || $valeur === null) {
+            return $this->findAll();
+        }
+
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.' . $champ . ' LIKE :valeur')
+            ->setParameter('valeur', '%' . $valeur . '%')
+            ->orderBy('v.datevisite', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
