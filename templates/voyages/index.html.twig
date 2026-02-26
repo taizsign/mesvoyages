@@ -8,10 +8,26 @@
     <table class="table table-striped mt-4">
         <thead class="table-dark">
         <tr>
-            <th>Ville</th>
-            <th>Pays</th>
-            <th>Note</th>
-            <th>Date</th>
+            <th>
+                Ville
+                <a href="{{ path('app_voyages_tri', {champ: 'ville', ordre: 'ASC'}) }}" class="btn btn-sm btn-outline-light ms-2">↑</a>
+                <a href="{{ path('app_voyages_tri', {champ: 'ville', ordre: 'DESC'}) }}" class="btn btn-sm btn-outline-light">↓</a>
+            </th>
+            <th>
+                Pays
+                <a href="{{ path('app_voyages_tri', {champ: 'pays', ordre: 'ASC'}) }}" class="btn btn-sm btn-outline-light ms-2">↑</a>
+                <a href="{{ path('app_voyages_tri', {champ: 'pays', ordre: 'DESC'}) }}" class="btn btn-sm btn-outline-light">↓</a>
+            </th>
+            <th>
+                Note
+                <a href="{{ path('app_voyages_tri', {champ: 'note', ordre: 'ASC'}) }}" class="btn btn-sm btn-outline-light ms-2">↑</a>
+                <a href="{{ path('app_voyages_tri', {champ: 'note', ordre: 'DESC'}) }}" class="btn btn-sm btn-outline-light">↓</a>
+            </th>
+            <th>
+                Date
+                <a href="{{ path('app_voyages_tri', {champ: 'datevisite', ordre: 'ASC'}) }}" class="btn btn-sm btn-outline-light ms-2">↑</a>
+                <a href="{{ path('app_voyages_tri', {champ: 'datevisite', ordre: 'DESC'}) }}" class="btn btn-sm btn-outline-light">↓</a>
+            </th>
         </tr>
         </thead>
         <tbody>

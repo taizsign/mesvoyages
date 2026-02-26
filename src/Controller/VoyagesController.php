@@ -20,4 +20,13 @@ class VoyagesController extends AbstractController
             'visites' => $visites,
         ]);
     }
+    #[Route('/voyages/tri/{champ}/{ordre}', name: 'app_voyages_tri')]
+    public function sort(VisiteRepository $repository, $champ, $ordre): Response
+    {
+        $visites = $repository->findAllOrderBy($champ, $ordre);
+
+        return $this->render('voyages/index.html.twig', [
+            'visites' => $visites,
+        ]);
+    }
 }

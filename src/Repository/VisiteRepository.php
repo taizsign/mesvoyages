@@ -40,4 +40,18 @@ class VisiteRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /**
+     * retourne visite triées
+     * @param string $champ
+     * @param string $ordre
+     * @return Visite[]
+     */
+    public function findAllOrderBy($champ, $ordre): array
+    {
+        return $this->createQueryBuilder('v')
+            ->orderBy('v.' . $champ, $ordre)
+            ->getQuery()
+            ->getResult();
+    }
 }
