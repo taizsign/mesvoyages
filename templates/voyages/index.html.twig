@@ -3,6 +3,31 @@
 {% block title %}Mes Voyages - Liste des voyages{% endblock %}
 
 {% block body %}
-    <h1>La liste de mes voyages</h1>
-    <p>Ici il y aura bientôt le tableau avec tous les voyages et les filtres.</p>
+    <h1 class="text-center mt-4 mb-4">La liste de mes voyages</h1>
+
+    <table class="table table-striped mt-4">
+        <thead class="table-dark">
+        <tr>
+            <th>Ville</th>
+            <th>Pays</th>
+            <th>Note</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {# voyages send par le controller #}
+        {% for visite in visites %}
+            <tr>
+                <td>{{ visite.ville }}</td>
+                <td>{{ visite.pays }}</td>
+                <td>{{ visite.note }}/20</td>
+                <td>{{ visite.datevisite ? visite.datevisite|date('d/m/Y') : '' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" class="text-center">Aucun voyage n'a été trouvé.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
