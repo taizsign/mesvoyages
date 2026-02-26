@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 class VoyagesController extends AbstractController
 {
@@ -39,5 +40,24 @@ class VoyagesController extends AbstractController
         return $this->render('voyages/index.html.twig', [
             'visites' => $visites,
         ]);
+    }
+    #[Route('/voyages/voyage/{id}', name: 'app_voyage_details')]
+    public function showOne(VisiteRepository $repository, $id): Response
+    {
+        // On cherche le voyage précis par son ID unique
+        $visite = $repository->find($id);
+
+        return $this->render('voyages/voyage.html.twig', [
+            'visite' => $visite,
+        ]);
+    }
+    #[Route('/voyages/suppr/{id}', name: 'app_voyage_suppr')]
+    public function suppr(int $id, VisiteRepository $repository, EntityManagerInterface $entityManager): Response
+    {
+        $visite = $repository->find($id);
+        $entityManager->remove($visite);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_voyages');
     }
 }

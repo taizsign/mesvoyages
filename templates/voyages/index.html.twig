@@ -28,36 +28,47 @@
                 <a href="{{ path('app_voyages_tri', {champ: 'datevisite', ordre: 'ASC'}) }}" class="btn btn-sm btn-outline-light ms-2">↑</a>
                 <a href="{{ path('app_voyages_tri', {champ: 'datevisite', ordre: 'DESC'}) }}" class="btn btn-sm btn-outline-light">↓</a>
             </th>
+            {# Colonne pour le bouton supprimer #}
+            <th>Actions</th>
         </tr>
         <tr>
             <th>
-                {# turbo="false" #}
                 <form method="POST" action="{{ path('app_voyages_recherche', {champ: 'ville'}) }}" class="d-flex" data-turbo="false">
                     <input type="text" name="recherche" class="form-control form-control-sm me-2" placeholder="Filtrer...">
                     <button class="btn btn-sm btn-secondary" type="submit">Recherche</button>
                 </form>
             </th>
             <th>
-                {# turbo="false"  #}
                 <form method="POST" action="{{ path('app_voyages_recherche', {champ: 'pays'}) }}" class="d-flex" data-turbo="false">
                     <input type="text" name="recherche" class="form-control form-control-sm me-2" placeholder="Filtrer...">
                     <button class="btn btn-sm btn-secondary" type="submit">Recherche</button>
                 </form>
             </th>
-            <th></th> <th></th> </tr>
+            <th></th> <th></th> <th></th> </tr>
         </thead>
         <tbody>
         {# voyages send par le controller #}
         {% for visite in visites %}
             <tr>
-                <td>{{ visite.ville }}</td>
+                <td>
+                    <a href="{{ path('app_voyage_details', {id: visite.id}) }}" class="text-decoration-none fw-bold">
+                        {{ visite.ville }}
+                    </a>
+                </td>
                 <td>{{ visite.pays }}</td>
                 <td>{{ visite.note }}/20</td>
                 <td>{{ visite.datevisite ? visite.datevisite|date('d/m/Y') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_voyage_suppr', {id: visite.id}) }}"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Etes-vous sûr de vouloir supprimer {{ visite.ville }} ?')">
+                        Supprimer
+                    </a>
+                </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4" class="text-center">Aucun voyage n'a été trouvé.</td>
+                <td colspan="5" class="text-center">Aucun voyage n'a été trouvé.</td>
             </tr>
         {% endfor %}
         </tbody>

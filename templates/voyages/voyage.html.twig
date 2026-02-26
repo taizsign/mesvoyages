@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du voyage{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">{{ visite.ville }} ({{ visite.pays }})</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Date de la visite :</strong> {{ visite.datevisite|date('d/m/Y') }}</p>
+                        <p><strong>Note :</strong> <span class="badge bg-warning text-dark">{{ visite.note }}/20</span></p>
+                        <p><strong>Températures :</strong> {{ visite.tempmin }}°C (min) / {{ visite.tempmax }}°C (max)</p>
+                    </div>
+                    <div class="col-md-6 border-start">
+                        <h5>Avis :</h5>
+                        <p class="fst-italic">{{ visite.avis|default('Pas encore d\'avis pour ce voyage.') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <a href="{{ path('app_voyages') }}" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
