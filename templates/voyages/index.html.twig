@@ -4,6 +4,11 @@
 
 {% block body %}
     <h1 class="text-center mt-4 mb-4">La liste de mes voyages</h1>
+    <div class="text-end mb-3">
+        <a href="{{ path('app_voyage_ajout') }}" class="btn btn-primary">
+            + Nouveau Voyage
+        </a>
+    </div>
 
     <table class="table table-striped mt-4">
         <thead class="table-dark">

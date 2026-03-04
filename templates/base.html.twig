@@ -34,6 +34,22 @@
             </ul>
         </div>
     </div>
+    <ul class="navbar-nav ms-auto">
+        {% if app.user %}
+            {# Si l'utilisateur est connecté #}
+            <li class="nav-item">
+                <span class="nav-link text-light me-3">Bonjour {{ app.user.userIdentifier }}</span>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-danger btn-sm mt-1" href="{{ path('app_logout') }}">Déconnexion</a>
+            </li>
+        {% else %}
+            {# Si personne n'est connecté #}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+            </li>
+        {% endif %}
+    </ul>
 </nav>
 
 {# conteneur #}
